@@ -1,0 +1,12 @@
+
+{
+  "devices": [
+      { "name": "Mini-PC", "watt": 50 },
+      { "name": "Mittlerer-PC", "watt": 150 },
+      { "name": "Leistungsstarker-PC", "watt": 300 },
+      { "name": "Projektor", "watt": 200 },
+      { "name": "Monitor", "watt": 80 }
+  ]
+}
+
+  
