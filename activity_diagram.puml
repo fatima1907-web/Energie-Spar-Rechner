@@ -1,0 +1,28 @@
+@startuml
+class Device {
+    - name: string
+    - watt: int
+    - count: int
+    - hours: int
+    - days: int
+    - weeks: int
+    + Device(name: string, watt: int, count: int, hours: int, days: int, weeks: int)
+    + toString(): string
+}
+
+class EnergyCalculator {
+    - devices: List<Device>
+    - electricityPrice: float
+    + addDevice(device: Device): void
+    + removeDevice(index: int): void
+    + calculateCosts(): void
+    + updateChart(cost24h: float, costOptimized: float): void
+    + saveDevicesToStorage(): void
+    + loadSavedDevices(): void
+}
+
+EnergyCalculator "1" *-- "*" Device : contains
+
+@enduml
+
+

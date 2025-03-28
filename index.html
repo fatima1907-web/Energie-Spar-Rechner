@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,70 +8,75 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>Energie-Spar-Rechner</h1>
-        
         <div class="grid-container">
             <!-- Links: Eingabeformular -->
             <div class="input-section">
                 <h2>Gerät hinzufügen</h2>
                 <label for="deviceSelect">Gerät auswählen:</label>
                 <select id="deviceSelect">
-                    <option value="">-- Gerät wählen --</option>
+                    <option value="">-- Gerät auswählen --</option>
                 </select>
-
                 <label for="deviceName">Gerätename:</label>
-                <input type="text" id="deviceName" placeholder="Gerätename eingeben">
-
+                <input type="text" id="deviceName" placeholder="Gerätename eingeben" disabled>
                 <label for="devicePower">Verbrauch (Watt):</label>
-                <input type="number" id="devicePower" placeholder="Watt eingeben">
-
+                <input type="number" id="devicePower" placeholder="Watt eingeben" min="1" disabled>
                 <label for="deviceCount">Anzahl Geräte:</label>
-                <input type="number" id="deviceCount" value="1">
-
+                <input type="number" id="deviceCount" value="1" min="1">
                 <label for="usageHours">Laufzeit (Stunden/Tag):</label>
-                <input type="number" id="usageHours" value="6">
-
+                <input type="number" id="usageHours" value="6" min="0" max="24">
                 <label for="usageDays">Laufzeit (Tage/Woche):</label>
-                <input type="number" id="usageDays" value="5">
-
+                <input type="number" id="usageDays" value="5" min="0" max="7">
                 <label for="usageWeeks">Laufzeit (Wochen/Jahr):</label>
-                <input type="number" id="usageWeeks" value="45">
-
+                <input type="number" id="usageWeeks" value="45" min="0" max="52">
                 <button onclick="addDevice()">Hinzufügen</button>
             </div>
-
             <!-- Rechts: Liste der Geräte -->
             <div class="device-list">
                 <h2>Liste der Geräte</h2>
                 <ul id="deviceList"></ul>
+                <div id="noDevicesMessage" class="info-message">Noch keine Geräte hinzugefügt.</div>
+                <button id="resetButton" onclick="resetDevices()" class="warning-button">Alle Geräte
+                    zurücksetzen</button>
             </div>
         </div>
-
         <div class="calculation-section">
-            <label for="electricityPrice">Strompreis (Cent pro kWh):</label>
-            <input type="number" id="electricityPrice" value="30">
+            <div class="calculation-inputs">
+                <label for="electricityPrice">Strompreis (Cent pro kWh):</label>
+                <input type="number" id="electricityPrice" value="30" min="1">
+                <label for="calculationYears">Berechnungszeitraum (Jahre):</label>
+                <input type="number" id="calculationYears" value="5" min="1" max="20">
+            </div>
             <button onclick="calculateCosts()">Berechnen</button>
         </div>
 
         <div class="results">
             <h2>Ergebnisse</h2>
-            <p>Kosten bei 365 Tagen Nutzung: <span id="costs365">0</span> €</p>
-            <p>Kosten bei optimierter Nutzung: <span id="optimizedCosts">0</span> €</p>
-            <p>Gesparte Kosten: <span id="savings">0</span> €</p>
+            <p>Kosten für <span id="yearsPeriod">1</span> Jahre bei 365 Tagen Nutzung: <span id="costs365">0</span> €
+            </p>
+            <p>Kosten für <span id="yearsOptimizedPeriod">1</span> Jahre bei optimierter Nutzung: <span
+                    id="optimizedCosts">0</span> €</p>
+            <p>Gesparte Kosten: <span id="savings">0</span> € (<span id="savingsPercentage">0</span>%)</p>
+            <div class="eco-impact">
+                <h3>Umweltauswirkung</h3>
+                <p>Eingesparte CO₂-Emissionen: <span id="co2Savings">0</span> kg</p>
+            </div>
         </div>
-
         <div class="chart-section">
-            <h2>Diagramm</h2>
+            <h2>Kostenverlauf</h2>
+            <div class="chart-container">
             <canvas id="energyChart"></canvas>
+            </div>
         </div>
-
-        <button onclick="sendEmail()">Ergebnis per E-Mail senden</button>
+        <div class="export-section">
+            <button onclick="sendEmail()" class="primary-button">Ergebnis per E-Mail senden</button>
+            <button onclick="printResults()" class="secondary-button">Ergebnisse drucken</button>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
+
 </html>
-
-

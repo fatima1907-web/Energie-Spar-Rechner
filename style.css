@@ -15,9 +15,12 @@ body {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-h1, h2 {
+h1,
+h2,
+h3 {
     color: #333;
 }
 
@@ -28,23 +31,31 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
-.input-section, .device-list {
+.input-section,
+.device-list {
     background-color: #e9f0c3;
     padding: 15px;
     border-radius: 8px;
+}
+
+.device-list {
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 .device-list ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .device-list li {
     background: white;
     margin: 6px 0;
     border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -72,30 +83,72 @@ h1, h2 {
     background: #cc0000;
 }
 
+.device-list li button.edit-button {
+    background: green;
+    margin-right: 5px;
+}
+
+.device-list li button.edit-button:hover {
+    background: #3b5a26;
+}
+
+.device-actions {
+    display: flex;
+    align-items: center;
+}
+
+.info-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 15px 0;
+}
+
 label {
     font-weight: bold;
     display: block;
     margin-top: 15px;
 }
 
-input, select, button {
+input,
+select,
+button {
     width: 100%;
-    padding: 4px;
+    padding: 8px;
     margin-top: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 button {
-    background-color: #446a2e;
+    background-color: #3c92ca;
     color: white;
     border: none;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #3b5a26;
+    background-color: #18405a;
+}
+
+button.warning-button {
+    background-color: #a94442;
+    margin-top: 10px;
+}
+
+button.warning-button:hover {
+    background-color: #843534;
+}
+
+button.primary-button {
+    background-color: #3c92ca;
+}
+
+button.secondary-button {
+    background-color: #666;
 }
 
 .results {
@@ -105,6 +158,12 @@ button:hover {
     margin-top: 20px;
 }
 
+.eco-impact {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
 .chart-section {
     background: white;
     padding: 15px;
@@ -112,5 +171,100 @@ button:hover {
     margin-top: 20px;
 }
 
+.export-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
 
+/* Previous CSS remains the same, just update the calculation-section and calculation-inputs */
+.calculation-section {
+    margin-top: 20px;
+    background-color: #e9f0c3;
+    padding: 15px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 10px;
+}
 
+.calculation-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.calculation-section label {
+    margin-top: 0;
+}
+
+.calculation-section button {
+    margin-top: 0;
+}
+
+.success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: help;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .export-section {
+        grid-template-columns: 1fr;
+    }
+
+    .calculation-section {
+        grid-template-columns: 1fr;
+    }
+}
